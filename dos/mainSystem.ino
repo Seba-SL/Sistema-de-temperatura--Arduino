@@ -1,15 +1,24 @@
+//La libreria Wire.h permite usar distintos dispositivos a traves del mismo puerto I2C 
+//La libreria LiquidCrystal_I2C.h permite trabajar el display con un controlador de comunicacion I2C
+// La ultima libreria Adafruit_MLX90614.h es para manipular el sensor de temperatura tambien de interfaz de comunicación digital SMBus/I2C
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 #include <Adafruit_MLX90614.h>
 
+//Se declara un led de alarma para exceso de temperatura
+#define LEDALARM 12
+
+
+//Inicializa el lcd de 16x2 y se declara un objeto del tipo Adafruit_MLX90614 , mlx 
 LiquidCrystal_I2C lcd(0x27,16,2);  //
 Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 
 void setup()
  {
-
-   pinMode(12,OUTPUT);
-
+  //El led en el pin 12 sera una salida
+  pinMode(LEDALARM,OUTPUT);
+  
+ //Se inicializan los puertos el I2C y el serial 
   Wire.begin();
 
   Serial.begin(9600);
@@ -25,7 +34,7 @@ void setup()
   
   // Escribimos el Mensaje en el LCD.
  // lcd.print("");
-  // put your setup code here, to run once:
+ 
 
 }
 
@@ -65,6 +74,6 @@ float ambiente , obj ;
    delay(500);
    Wire.endTransmission();
       delay(500);
-  // put your main code here, to run repeatedly:
+  
 
 }
